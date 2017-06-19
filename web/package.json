@@ -1,0 +1,26 @@
+{
+  "name": "doctors_note",
+  "version": "1.0.0",
+  "description": "A web application for connecting clients with healthcare practitioners.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djamesjones4/doctors_note.git"
+  },
+  "keywords": [
+    "Javascript",
+    "AngularJS",
+    "HTML",
+    "CSS"
+  ],
+  "author": "Derek Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djamesjones4/doctors_note/issues"
+  },
+  "homepage": "https://github.com/djamesjones4/doctors_note#readme"
+}
