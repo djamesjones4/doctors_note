@@ -4,8 +4,11 @@
   "description": "A web application for connecting clients with healthcare practitioners.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
+    "nodemon": "node server.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,25 @@
   "bugs": {
     "url": "https://github.com/djamesjones4/doctors_note/issues"
   },
-  "homepage": "https://github.com/djamesjones4/doctors_note#readme"
+  "homepage": "https://github.com/djamesjones4/doctors_note#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.8",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "express-validation": "^1.0.2",
+    "joi": "^10.6.0",
+    "knex": "^0.13.0",
+    "pg": "^6.4.0"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "mocha": "3.2.0",
+    "supertest": "3.0.0"
+  },
+  "engines": {
+    "node": "v7.9.0"
+  }
 }

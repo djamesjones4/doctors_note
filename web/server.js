@@ -11,8 +11,8 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'client')))
 app.use(express.static(path.join(__dirname, '/../', 'node_modules')))
 
-const users = require('./routes/users')
-app.use('/api/users', users)
+const signup = require('./routes/signup')
+app.use('/api/signup', signup)
 
 app.use('*', function(req, res, next) {
   res.sendFile('index.html', { root: path.join(__dirname, 'client') })

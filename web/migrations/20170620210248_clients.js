@@ -1,10 +1,11 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('users', (table) => {
-    table.increments()
+  return knex.schema.createTable('clients', (table) => {
+    table.increments().primary()
     table.string('firstname').notNullable()
     table.string('lastname').notNullable()
     table.string('username').notNullable().unique()
+    table.string('hashed_password').notNullable()
     table.string('email').notNullable().unique()
     table.boolean('isclient').notNullable().defaultTo(true)
     table.boolean('ispractitioner').notNullable().defaultTo(false)
@@ -14,5 +15,5 @@ exports.up = function(knex, Promise) {
 }
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('users')
+  return knex.schema.dropTable('clients')
 }
