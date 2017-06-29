@@ -8,3 +8,4 @@ const jwt = require('jsonwebtoken')
 // GET notes for practitioner or client
 
 // GET notes by id
+module.exports = router
