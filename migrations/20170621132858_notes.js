@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.integer('practitioner_id').references('practitioners.id').notNullable().onDelete('cascade')
     table.integer('client_id').references('clients.id').notNullable().onDelete('cascade')
+    table.string('title').notNullable()
     table.string('content').notNullable()
     table.timestamps(true, true)
   })
