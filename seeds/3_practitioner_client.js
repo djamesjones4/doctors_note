@@ -5,7 +5,7 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       return Promise.all([
       // Inserts seed entries
-        knex('table_name').insert([
+        knex('practitioner_client').insert([
           { id: 1,
             client_id: 1,
             practitioner_id: 1
