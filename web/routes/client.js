@@ -12,13 +12,14 @@ router.get('/', function(req, res, next) {
       user_name = payload.username
       getClientInfo(user_name)
     } else if (err) {
-      res.redirect('/')
+      res.send('please log in')
     }
 
     function getClientInfo(username) {
       knex('clients')
         .where('username', username)
         .then((data) => {
+          console.log('clients data: ', data)
           res.send(data)
         })
     }

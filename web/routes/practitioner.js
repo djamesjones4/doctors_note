@@ -1,3 +1,4 @@
+// /api/practitioner
 const express = require('express')
 const router = express.Router()
 const knex = require('../knex')
@@ -12,13 +13,14 @@ router.get('/', function(req, res, next) {
       user_id = payload.id
       getPractitionerInfo(user_id)
     } else if (err) {
-      res.redirect('/')
+      res.send('please log in')
     }
 
     function getPractitionerInfo(userid) {
       knex('practitioner_client')
         .where('practitioner_id', userid)
         .then((data) => {
+          console.log('practitioner\'s data: ', data)
           res.send(data)
         })
     }
