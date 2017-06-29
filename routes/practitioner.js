@@ -5,7 +5,7 @@ const knex = require('../knex')
 // const boom = require('boom')
 const jwt = require('jsonwebtoken')
 
-// GET all of the clients that this practitioner has
+// GET practitioner's clients for main view upon token verification
 router.get('/', function(req, res, next) {
   let user_id
   jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
