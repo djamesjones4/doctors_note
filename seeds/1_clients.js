@@ -10,7 +10,7 @@ exports.seed = function(knex, Promise) {
             firstname: 'Derek',
             lastname: 'Jones',
             username: 'djamesjones4',
-            hashed_password: "",
+            hashed_password: '$2a$12$dfoHuqRpfqkIZMcgt/Hw0eJnMFbT8/7fljzzy1B5sA7n7SILKxxra',
             email: 'djamesjones4@gmail.com',
             isclient: true,
             ispractitioner: false,

@@ -10,7 +10,7 @@ exports.seed = function(knex, Promise) {
             firstname: 'John',
             lastname: 'Jones',
             username: 'drjones',
-            hashed_password: '',
+            hashed_password: '$2a$12$dfoHuqRpfqkIZMcgt/Hw0eJnMFbT8/7fljzzy1B5sA7n7SILKxxra',
             email: 'jonesder@msu.edu',
             isclient: false,
             ispractitioner: true,
