@@ -15,13 +15,13 @@ router.post('/', function(req, res, next) {
   console.log('in post router')
   let username = req.body.username
   let password = req.body.password
-  console.log('username: ', username)
-  console.log('password: ', password)
+  console.log('req.body: ', req.body)
   if (username) {
     knex('clients')
           .where('username', username)
           .then((data) => {
             if (data.length > 0) {
+              console.log('data > 0')
               bcrypt.compare(password, data[0].hashed_password, (err, result) => {
                 if (result) {
                   let token = jwt.sign({
@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
                   res.set('Content-Type', 'json')
                   res.send(token)
                 } else {
-                  res.send({
+                  res.json({
                     error: 'Bad username or password'
                   })
                 }
@@ -46,7 +46,8 @@ router.post('/', function(req, res, next) {
                 .where('username', username)
                 .then((practData) => {
                   if (practData.length > 0) {
-                    bcrypt.compare(password, data[0].hashed_password, (err, result) => {
+                    console.log('practData.length > 0')
+                    bcrypt.compare(password, practData[0].hashed_password, (err, result) => {
                       if (result) {
                         let token = jwt.sign({
                           exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
@@ -55,11 +56,12 @@ router.post('/', function(req, res, next) {
                           is_client: practData[0].isclient,
                           is_practitioner: practData[0].ispractitioner,
                           is_admin: practData[0].isadmin
-                        }, process.env.JWT_KEY)
-                        res.set('Content-Type', 'json')
-                        res.send(token)
+                        }, 'secret')
+                        console.log('token: ', token)
+                        // res.set('Content-Type', 'json')
+                        res.json({token: token})
                       } else {
-                        res.send({
+                        res.json({
                           error: 'Bad username or password'
                         })
                       }
