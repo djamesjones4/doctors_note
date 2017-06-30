@@ -8,6 +8,7 @@ const validations = require('../validations/signup')
 const jwt = require('jsonwebtoken')
 
 router.post('/', function(req, res, next) {
+  console.log('in post router')
       let username = req.body.username
       let password = req.body.password
       console.log('username: ', username)
