@@ -7,17 +7,18 @@ const ev = require('express-validation')
 const validations = require('../validations/signup')
 const jwt = require('jsonwebtoken')
 
-router.get('/', function(req, res, next) => {
+router.get('/', function(req, res, next) {
   res.send('you\'ve reached the sign in route')
 })
+
 router.post('/', function(req, res, next) {
   console.log('in post router')
-      let username = req.body.username
-      let password = req.body.password
-      console.log('username: ', username)
-      console.log('password: ', password)
-      if (username) {
-        knex('clients')
+  let username = req.body.username
+  let password = req.body.password
+  console.log('username: ', username)
+  console.log('password: ', password)
+  if (username) {
+    knex('clients')
           .where('username', username)
           .then((data) => {
             if (data.length > 0) {
@@ -51,10 +52,7 @@ router.post('/', function(req, res, next) {
                           exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
                           id: practData[0].id,
                           username: practData[0].username,
-                          username: practData[0].username,
                           is_client: practData[0].isclient,
-                          is_client: practData[0].isclient,
-                          is_practitioner: practData[0].ispractitioner,
                           is_practitioner: practData[0].ispractitioner,
                           is_admin: practData[0].isadmin
                         }, process.env.JWT_KEY)
@@ -70,7 +68,7 @@ router.post('/', function(req, res, next) {
                 })
             }
           })
-      }
-    }
+  }
+})
 
     module.exports = router
