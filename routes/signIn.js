@@ -7,6 +7,9 @@ const ev = require('express-validation')
 const validations = require('../validations/signup')
 const jwt = require('jsonwebtoken')
 
+router.get('/', function(req, res, next) => {
+  res.send('you\'ve reached the sign in route')
+})
 router.post('/', function(req, res, next) {
   console.log('in post router')
       let username = req.body.username
