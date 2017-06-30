@@ -31,13 +31,10 @@ router.post('/', function(req, res, next) {
                     is_client: data[0].isclient,
                     is_practitioner: data[0].ispractitioner,
                     is_admin: data[0].isadmin
-                  }, process.env.JWT_KEY)
-                  res.set('Content-Type', 'json')
-                  res.send(token)
+                  }, 'secret')
+                  res.json({ token: token })
                 } else {
-                  res.json({
-                    error: 'Bad username or password'
-                  })
+                  res.status(403).json({ error: 'Bad username or password' })
                 }
               })
             } else {
@@ -57,15 +54,14 @@ router.post('/', function(req, res, next) {
                           is_practitioner: practData[0].ispractitioner,
                           is_admin: practData[0].isadmin
                         }, 'secret')
-                        console.log('token: ', token)
-                        // res.set('Content-Type', 'json')
-                        res.json({token: token})
+                        res.json({ token: token })
                       } else {
-                        res.json({
-                          error: 'Bad username or password'
-                        })
+                        res.status(403).json({ error: 'Bad username or password' })
                       }
                     })
+                  } else {
+                    console.log('user doesnt exist error')
+                    res.status(403).json({ error: 'Bad username or password' })
                   }
                 })
             }
