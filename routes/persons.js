@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
         .where('client_id', userid)
         .then((data) => {
           console.log('client\'s data: ', data)
-          res.json(data)
+          res.json(data[0])
         })
     }
     function getPractitionerInfo(userid) {
@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
         .where('practitioner_id', userid)
         .then((data) => {
           console.log('practitioner\'s data: ', data[0])
-          res.json(data)
+          res.json(data[0])
         })
     }
   })
