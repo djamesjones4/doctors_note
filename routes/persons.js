@@ -18,19 +18,18 @@ router.post('/', function(req, res, next) {
       user_id = payload.id
       client = payload.is_client
       practitioner = payload.is_practitioner
-      // getClientInfo(user_name)
     } else if (err) {
       res.status(401).json({ error: 'please log in' })
     }
     if (client) {
-      getClientInfo(user_name)
+      getClientInfo(user_id)
     } else if (practitioner) {
       getPractitionerInfo(user_id)
     }
 
-    function getClientInfo(username) {
-      knex('clients')
-        .where('username', username)
+    function getClientInfo(userid) {
+      knex('practitioner_client')
+        .where('client_id', userid)
         .then((data) => {
           console.log('client\'s data: ', data)
           res.json(data[0])
