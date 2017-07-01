@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('username').notNullable().unique()
     table.string('hashed_password').notNullable()
     table.string('email').notNullable().unique()
+    table.string('practitioner_type').notNullable()
     table.boolean('isclient').notNullable().defaultTo(false)
     table.boolean('ispractitioner').notNullable().defaultTo(true)
     table.boolean('isadmin').notNullable().defaultTo(false)

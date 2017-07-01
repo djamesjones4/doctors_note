@@ -46,6 +46,7 @@ router.post('/', function(req, res, next) {
                           exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
                           id: practData[0].id,
                           username: practData[0].username,
+                          pract_type: practData[0].practitioner_type,
                           is_client: practData[0].isclient,
                           is_practitioner: practData[0].ispractitioner,
                           is_admin: practData[0].isadmin
