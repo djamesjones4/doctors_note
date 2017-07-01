@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
   let client
   let practitioner
   let user_id
+  console.log('req.body: ', req.body)
   jwt.verify(req.body.token, 'secret', (err, payload) => {
     if (payload) {
       user_name = payload.username
@@ -30,7 +31,7 @@ router.get('/', function(req, res, next) {
       knex('clients')
         .where('username', username)
         .then((data) => {
-          console.log('clients data: ', data)
+          console.log('client\'s data: ', data)
           res.json(data[0])
         })
     }
