@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
                   }, 'secret')
                   res.json({ token: token })
                 } else {
-                  res.status(403).json({ error: 'Bad username or password' })
+                  res.status(401).json({ error: 'Bad username or password' })
                 }
               })
             } else {
@@ -56,12 +56,12 @@ router.post('/', function(req, res, next) {
                         }, 'secret')
                         res.json({ token: token })
                       } else {
-                        res.status(403).json({ error: 'Bad username or password' })
+                        res.status(401).json({ error: 'Bad username or password' })
                       }
                     })
                   } else {
                     console.log('user doesnt exist error')
-                    res.status(403).json({ error: 'Bad username or password' })
+                    res.status(401).json({ error: 'Bad username or password' })
                   }
                 })
             }

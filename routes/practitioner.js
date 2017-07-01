@@ -8,12 +8,12 @@ const jwt = require('jsonwebtoken')
 // GET practitioner's clients for main view upon token verification
 router.get('/', function(req, res, next) {
   let user_id
-  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
+  jwt.verify(req.body.token, 'secret', (err, payload) => {
     if (payload) {
       user_id = payload.id
       getPractitionerInfo(user_id)
     } else if (err) {
-      res.send('please log in')
+      res.status(401).json('please log in')
     }
 
     function getPractitionerInfo(userid) {
@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
         .where('practitioner_id', userid)
         .then((data) => {
           console.log('practitioner\'s data: ', data)
-          res.send(data)
+          res.json(data[0])
         })
     }
   })

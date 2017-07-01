@@ -15,12 +15,12 @@ app.use(express.static(path.join(__dirname, 'client')))
 app.use(express.static(path.join(__dirname, '/../', 'node_modules')))
 
 const signIn = require('./routes/signIn')
-const client = require('./routes/client')
+const persons = require('./routes/persons')
 const practitioner = require('./routes/practitioner')
 const notes = require('./routes/notes')
 
 app.use('/api/signIn', signIn)
-app.use('/api/client', client)
+app.use('/api/persons', persons)
 app.use('/api/practitioner', practitioner)
 app.use('/api/notes', notes)
 
