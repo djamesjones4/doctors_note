@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 
 // GET client's practitioner info for main view upon verifying token
 router.get('/', function(req, res, next) {
+  console.log('getting stuff')
   let user_name
   let client
   let practitioner

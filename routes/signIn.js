@@ -12,16 +12,13 @@ router.get('/', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
-  console.log('in post router')
   let username = req.body.username
   let password = req.body.password
-  console.log('req.body: ', req.body)
   if (username) {
     knex('clients')
           .where('username', username)
           .then((data) => {
             if (data.length > 0) {
-              console.log('data > 0')
               bcrypt.compare(password, data[0].hashed_password, (err, result) => {
                 if (result) {
                   let token = jwt.sign({
@@ -43,7 +40,6 @@ router.post('/', function(req, res, next) {
                 .where('username', username)
                 .then((practData) => {
                   if (practData.length > 0) {
-                    console.log('practData.length > 0')
                     bcrypt.compare(password, practData[0].hashed_password, (err, result) => {
                       if (result) {
                         let token = jwt.sign({
@@ -60,7 +56,6 @@ router.post('/', function(req, res, next) {
                       }
                     })
                   } else {
-                    console.log('user doesnt exist error')
                     res.status(401).json({ error: 'Bad username or password' })
                   }
                 })
