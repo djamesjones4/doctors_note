@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
       knex('practitioner_client')
         .where('practitioner_id', userid)
         .then((data) => {
-          console.log('practitioner\'s data: ', data[0])
+          console.log('practitioner\'s data: ', data)
           res.json(data)
         })
     }
