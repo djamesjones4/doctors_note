@@ -28,16 +28,22 @@ router.post('/', function(req, res, next) {
     }
 
     function getClientInfo(userid) {
-      knex('practitioner_client')
-        .where('client_id', userid)
+      knex('clients')
+        .where('clients.id', userid)
+        .join('practitioner_client', 'clients.id', '=', 'practitioner_client.client_id')
+        .join('practitioners', 'practitioner_client.practitioner_id', '=', 'practitioners.id')
+        .select(['client.id', 'practitioners.firstname', 'practitioners.lastname', 'practitioners.practitioner_type'])
         .then((data) => {
           console.log('client\'s data: ', data)
           res.json(data)
         })
     }
     function getPractitionerInfo(userid) {
-      knex('practitioner_client')
-        .where('practitioner_id', userid)
+      knex('practitioners')
+        .where('practitioners.id', userid)
+        .join('practitioner_client', 'practitioners.id', '=', 'practitioner_id')
+        .join('clients', 'clients.id', '=', 'client_id')
+        .select(['practitioners.id', 'clients.firstname', 'clients.lastname'])
         .then((data) => {
           console.log('practitioner\'s data: ', data)
           res.json(data)

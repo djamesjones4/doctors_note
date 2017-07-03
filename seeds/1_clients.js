@@ -15,6 +15,16 @@ exports.seed = function(knex, Promise) {
             isclient: true,
             ispractitioner: false,
             isadmin: false
+          }, {
+            id: 2,
+            firstname: 'Steven',
+            lastname: 'Hendricks',
+            username: 'steve',
+            hashed_password: '$2a$12$dfoHuqRpfqkIZMcgt/Hw0eJnMFbT8/7fljzzy1B5sA7n7SILKxxra',
+            email: 'steve@steve.com',
+            isclient: true,
+            ispractitioner: false,
+            isadmin: false
           }
         ])
       ])

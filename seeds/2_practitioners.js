@@ -16,6 +16,17 @@ exports.seed = function(knex, Promise) {
             isclient: false,
             ispractitioner: true,
             isadmin: false
+          }, {
+            id: 2,
+            firstname: 'Howard',
+            lastname: 'Mertle',
+            username: 'drmertle',
+            hashed_password: '$2a$12$dfoHuqRpfqkIZMcgt/Hw0eJnMFbT8/7fljzzy1B5sA7n7SILKxxra',
+            email: 'me@me.com',
+            practitioner_type: 'cardiologist',
+            isclient: false,
+            ispractitioner: true,
+            isadmin: false
           }
         ])
       ])
