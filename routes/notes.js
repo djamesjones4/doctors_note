@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
       }
       getClientNotes(client_id, practitioner_id)
     } else if (err) {
-      res.send('please log in')
+      res.json({ error: 'please log in' })
     }
 
     function getClientNotes(clientId, practId) {
@@ -40,27 +40,46 @@ router.post('/', function(req, res, next) {
     }
   })
 })
-// GET notes by id
-router.get('/:id', function(req, res, next) {
-  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
-    let user_name
-    let noteId = req.params.id
-    if (payload) {
-      user_name = payload.username
-      getSpecificNote(user_name)
-    } else if (err) {
-      res.send('please log in')
-    }
+// Update notes
 
-    function getSpecificNote(username) {
-      // get note by id
+router.patch('/', function(req, res, next) {
+  let noteId
+  let noteContent
+  jwt.verify(req.body.token, 'secret', (err, payload) => {
+    if (payload) {
+      req.body.noteId = noteId
+      req.body.noteContent = noteContent
+      updateNote(noteId, noteContent)
+    } else if (err) {
+      res.json({ error: "please log in" })
+    }
+  })
+  function updateNote(id, content) {
+    knex('notes')
+    .where('id', noteId)
+    .update({ id, content })
+    .then((data) => {
+      console.log('updated note data: ', data)
+      res.json(data)
+    })
+  }
+})
+
+router.delete('/', (req, res, next) => {
+  let noteId = req.body.noteId
+  jwt.verfy(req.body.token, 'secret', (err, payload) => {
+    if (payload) {
       knex('notes')
-        .where('id', noteId)
-        .then((data) => {
-          console.log('clients data: ', data)
-          res.send(data)
-        })
+      .del()
+      .where('id', noteId)
+      .debug(true)
+      .then(() => {
+        res.status(200)
+      })
+    } else if (err) {
+      res.json({ error: 'please log in' })
     }
   })
 })
+
 module.exports = router
