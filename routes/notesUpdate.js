@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
   })
   function updateNote(id, content) {
     knex('notes')
-    .where('id', noteId)
+    .where('id', id)
     .update({ id, content })
     .then((data) => {
       console.log('updated note data: ', data)
