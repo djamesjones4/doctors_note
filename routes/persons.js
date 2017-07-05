@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
         .where('clients.id', userid)
         .join('practitioner_client', 'clients.id', '=', 'practitioner_client.client_id')
         .join('practitioners', 'practitioner_client.practitioner_id', '=', 'practitioners.id')
-        .select(['client.id', 'practitioners.firstname', 'practitioners.lastname', 'practitioners.practitioner_type'])
+        .select(['clients.id', 'practitioners.firstname', 'practitioners.lastname', 'practitioners.practitioner_type'])
         .then((data) => {
           console.log('client\'s data: ', data)
           res.json(data)
@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
         .where('practitioners.id', userid)
         .join('practitioner_client', 'practitioners.id', '=', 'practitioner_id')
         .join('clients', 'clients.id', '=', 'client_id')
-        .select(['practitioners.id', 'clients.firstname', 'clients.lastname'])
+        .select(['clients.id', 'clients.firstname', 'clients.lastname'])
         .then((data) => {
           console.log('practitioner\'s data: ', data)
           res.json(data)
