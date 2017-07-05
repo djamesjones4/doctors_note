@@ -41,14 +41,14 @@ router.post('/', function(req, res, next) {
   })
 })
 // Update notes
-
 router.patch('/', function(req, res, next) {
   let noteId
   let noteContent
   jwt.verify(req.body.token, 'secret', (err, payload) => {
     if (payload) {
-      req.body.noteId = noteId
-      req.body.noteContent = noteContent
+      noteId = req.body.noteId
+      console.log('note id: ', noteId)
+      noteContent = req.body.noteContent
       updateNote(noteId, noteContent)
     } else if (err) {
       res.json({ error: "please log in" })
@@ -56,8 +56,9 @@ router.patch('/', function(req, res, next) {
   })
   function updateNote(id, content) {
     knex('notes')
-    .where('id', noteId)
-    .update({ id, content })
+    .where('id', id)
+    .update({ content })
+    .returning(['id', 'title', 'content'])
     .then((data) => {
       console.log('updated note data: ', data)
       res.json(data)
