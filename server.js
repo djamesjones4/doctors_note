@@ -24,7 +24,7 @@ app.use('/api/signIn', signIn)
 app.use('/api/persons', persons)
 app.use('/api/practitioner', practitioner)
 app.use('/api/notes', notes)
-app.use('/api/notes/update')
+app.use('/api/notes/update', updateNotes)
 
 // app.use('*', function(req, res, next) {
 //   res.sendFile('index.html', { root: path.join(__dirname, 'client') })
