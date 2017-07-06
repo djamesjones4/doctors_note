@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
       // get note by id
       knex('notes')
         .where('client_id', clientId)
-        .andwhere('practitioner_id', practitioner_id)
+        .where('practitioner_id', practitioner_id)
         .then((data) => {
           console.log('note data: ', data)
           res.json(data)
