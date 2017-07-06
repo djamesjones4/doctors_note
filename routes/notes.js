@@ -8,18 +8,19 @@ const jwt = require('jsonwebtoken')
 // GET notes for practitioner or client
 // GET notes where client_id && practitioner_id
 router.post('/', function(req, res, next) {
-  console.log('in notes route')
   let user_name
   let client_id
   let practitioner_id
   let user_id
   jwt.verify(req.body.token, 'secret', (err, payload) => {
     if (payload) {
+      console.log('payload: ', payload)
+      console.log('requestedPersonID: ', req.body.requestedPersonID)
       user_name = payload.username
-      if (payload.ispractitioner === true) {
+      if (payload.is_practitioner) {
         practitioner_id = payload.id
         client_id = req.body.requestedPersonID
-      } else {
+      } else if (!payload.is_practitioner) {
         client_id = payload.id
         practitioner_id = req.body.requestedPersonID
       }
