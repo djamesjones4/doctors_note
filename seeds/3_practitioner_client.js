@@ -29,6 +29,14 @@ exports.seed = function(knex, Promise) {
             id: 6,
             client_id: 1,
             practitioner_id: 5
+          }, {
+            id: 7,
+            client_id: 3,
+            practitioner_id: 1
+          }, {
+            id: 8,
+            client_id: 4,
+            practitioner_id: 1
           }
         ])
       ])
