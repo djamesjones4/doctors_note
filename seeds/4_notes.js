@@ -29,6 +29,19 @@ exports.seed = function(knex, Promise) {
           title: 'Know Yourself',
           content:
           'The power of nature exists in its silence. Human words cannot encode the meaning because human language has access only to the shadow of meaning.'
+        }, {
+          id: 5,
+          practitioner_id: 1,
+          client_id: 4,
+          title: 'On Borgs',
+          content:
+          'Don\'t assimilate!'
+        }, {
+          id: 6,
+          practitioner_id: 1,
+          client_id: 1,
+          title: 'Health of your head',
+          content: 'Don\'t lose your hat...Ever!'
         }])
       ])
     })
