@@ -14,6 +14,7 @@ router.post('/', function(req, res, next) {
   console.log('req.body: ', req.body)
   jwt.verify(req.body.token, 'secret', (err, payload) => {
     if (payload) {
+      console.log('payload: ', payload)
       user_name = payload.username
       user_id = payload.id
       client = payload.is_client
@@ -28,22 +29,22 @@ router.post('/', function(req, res, next) {
     }
 
     function getClientInfo(userid) {
-      knex('clients')
-        .where('clients.id', userid)
-        .join('practitioner_client', 'clients.id', '=', 'practitioner_client.client_id')
+      knex('practitioner_client')
+        .where('client_id', userid)
+        .join('clients', 'clients.id', '=', 'practitioner_client.client_id')
         .join('practitioners', 'practitioner_client.practitioner_id', '=', 'practitioners.id')
-        .select(['clients.id', 'practitioners.firstname', 'practitioners.lastname', 'practitioners.practitioner_type'])
+        .select(['clients.id', 'practitioners.id', 'practitioners.firstname', 'practitioners.lastname', 'practitioners.practitioner_type'])
         .then((data) => {
           console.log('client\'s data: ', data)
           res.json(data)
         })
     }
     function getPractitionerInfo(userid) {
-      knex('practitioners')
-        .where('practitioners.id', userid)
-        .join('practitioner_client', 'practitioners.id', '=', 'practitioner_id')
-        .join('clients', 'clients.id', '=', 'client_id')
-        .select(['clients.id', 'clients.firstname', 'clients.lastname'])
+      knex('practitioner_client')
+        .where('practitioner_id', userid)
+        .join('practitioners', 'practitioners.id', '=', 'practitioner_client.practitioner_id')
+        .join('clients', 'clients.id', '=', 'practitioner_client.client_id')
+        .select(['practitioners.id', 'clients.id', 'clients.firstname', 'clients.lastname'])
         .then((data) => {
           console.log('practitioner\'s data: ', data)
           res.json(data)
