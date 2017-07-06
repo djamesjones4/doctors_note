@@ -23,6 +23,8 @@ router.post('/', function(req, res, next) {
         client_id = payload.id
         practitioner_id = req.body.requestedPersonID
       }
+      console.log('client id: ', client_id)
+      console.log('pract id: ', practitioner_id)
       getClientNotes(client_id, practitioner_id)
     } else if (err) {
       res.json({ error: 'please log in' })
