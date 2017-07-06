@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
+  if (!req.body.token){
   let username = req.body.username
   let password = req.body.password
   if (username) {
@@ -76,6 +77,28 @@ router.post('/', function(req, res, next) {
             })
         }
       })
+  }
+  }
+  if (req.body.token) {
+    jwt.verify(req.body.token, 'secret', (err, payload) => {
+      if (payload) {
+        if (payload.is_practitioner) {
+          knex('practitioners')
+            .where('id', payload.id)
+            .then((data) => {
+              res.status(200)
+            })
+        } else {
+          knex('clients')
+          .where('id', payload.id)
+          .then((data) => {
+            res.status(200)
+          })
+        }
+      } else if (err) {
+        res.status(401).json({ error: 'Please log in' })
+      }
+    })
   }
 })
 
